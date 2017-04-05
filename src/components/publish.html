@@ -1,0 +1,53 @@
+<input class="blog-title" type="text" placeholder="请构思好文章标题">
+<input class="publish-btn" type="button" value="发布">
+
+<script>
+  module.exports = {
+    events: {
+      'click .publish-btn': 'publish'
+    },
+
+    handle: {
+      publish: function() {
+        var _this = this
+        var contentObj = _this.parent.getContent()
+        $.ajax({
+          url: '/api/blogs',
+          type: 'POST',
+          data: {
+            title: _this.$('.blog-title').val(),
+            content: contentObj.content,
+            contentHTML: contentObj.contentHTML,
+            createTime: new Date() + ''
+          }
+        }).done(function (result) {
+          alert('发表成功！')
+        })
+      }
+    }
+  }
+</script>
+
+<style scoped>
+.blog-title {
+  border: 1px solid #ddd;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  padding: 0 4px;
+  width: 400px;
+  margin-right: 10px;
+}
+
+.publish-btn {
+  font-size: 16px;
+  padding: 4px 20px;
+  border-radius: 3px;
+  margin-right: 10px;
+  color: #ffffff;
+  border: 1px solid #2CB260;
+  background: #2CB260;
+  cursor: pointer;
+  float: right;
+}
+</style>

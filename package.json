@@ -1,0 +1,32 @@
+{
+  "name": "coala-blog",
+  "version": "0.0.1",
+  "description": "coala.js starter kit",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --hot --colors --config build/webpack.dev.js",
+    "build": "rm -rf dist & webpack --optimize-minimize --config build/webpack.prd.js"
+  },
+  "keywords": [
+    "coala",
+    "blog"
+  ],
+  "author": "cheft",
+  "license": "ISC",
+  "dependencies": {
+    "coala": ">= 1.0.0-beta.1 < 2.0.0",
+    "jquery": "^3.2.1",
+    "simplemde": "^1.11.2",
+    "typo.css": "^2.1.2"
+  },
+  "devDependencies": {
+    "coala-dot-loader": "^0.0.2",
+    "css-loader": "^0.18.0",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.10.1",
+    "html-webpack-plugin": "^2.28.0",
+    "style-loader": "^0.12.4",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^1.10.1"
+  }
+}

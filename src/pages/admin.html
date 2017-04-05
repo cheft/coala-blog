@@ -1,0 +1,84 @@
+<div>
+  <textarea class="blog-content"></textarea>
+</div>
+<script>
+  require('simplemde/dist/simplemde.min.css')
+  var SimpleMDE = require('simplemde')
+  var coala = require('coala')
+
+  module.exports = {
+    listen: {
+      mount: function() {
+        this.initEditor()
+      }  
+    },
+
+    mixins: {
+      initEditor: function() {
+        var _this = this
+        this.simplemde = new SimpleMDE({
+          element: this.$('.blog-content')[0],
+          autosave: {
+            enabled: true,
+            uniqueId: 'coala-blog',
+            delay: 1000,
+          },
+          placeholder: '请用 Markdown 格式书写博客内容',
+          showIcons: ['code', 'table'],
+          hideIcons: ['preview', 'guide'],
+          status: false
+        })
+        this.simplemde.toggleSideBySide()
+        this.$('.fa-columns').hide()
+        this.$('.fa-arrows-alt').hide()
+        setTimeout(function() {
+          _this.$('.CodeMirror').css('border-color', '#ddd')
+        }, 20)
+
+        this.appendSomething()
+      },
+
+      appendSomething: function() {
+        this.$('.editor-toolbar').append('<span class="editor-append"></span>')
+        coala.mount(require('../components/publish.html'), '.editor-append').parent = this
+      },
+
+      getContent() {
+        var content = this.simplemde.value()
+        return {
+          content: content,
+          contentHTML: this.simplemde.options.previewRender(content)
+        }
+      }
+    }
+  }
+</script>
+
+<style scoped>
+.blog-content {
+  display: none;
+}
+
+.CodeMirror {
+  border-color: #fff;
+}
+
+.editor-toolbar {
+  overflow-x: hidden;
+}
+
+.editor-append {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  text-align: center;
+  width: 100%;
+  clear: both;
+}
+
+@media(max-width: 1240px) {
+  .editor-append {
+    text-align: right;
+  }
+}
+</style>

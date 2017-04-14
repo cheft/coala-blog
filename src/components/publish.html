@@ -10,12 +10,15 @@
     handle: {
       publish: function() {
         var _this = this
-        var contentObj = _this.parent.getContent()
+        var title = this.$('.blog-title').val()
+        if (!title) return alert('请填写标题');
+        var contentObj = this.parent.getContent()
+        var now = new Date()
         $.ajax({
           url: '/api/blogs',
           type: 'POST',
           data: {
-            title: _this.$('.blog-title').val(),
+            title: title,
             content: contentObj.content,
             contentHTML: contentObj.contentHTML,
             createTime: new Date() + ''

@@ -1,7 +1,8 @@
 <div>
   {{~data.resource :item}}
   <div class="item" data-id={{!item.id}}>
-    <h1 class="title">{{!item.title}}</h1>
+    <h1 class="title"><a href="#/{{!item.id}}">{{!item.title}}</a></h1>
+    <h5 class="title">{{!item.createTime}}</h5>
     <div class="content">{{!item.intro}}</div>
   </div>
   {{~}}
@@ -17,6 +18,8 @@
 
     listen: {
       update: function() {
+        // now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate() + ' ' +
+              // now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds()
         this.data.resource.forEach(function(item) {
           item.intro = $(item.contentHTML).text().substr(1, 200)
         })
@@ -27,20 +30,12 @@
       fetch: function() {
         return $.ajax({
           url: '/api/blogs',
-          data: {}
+          data: {
+            '_sort': 'createTime',
+            '_order': 'DESC'
+          }
         })
       }
-    },
-
-    events: {
-      'click .item': 'openDetail'
-    },
-
-    handle: {
-      openDetail: function(e) {
-        var id = $(e.currentTarget).data('id')
-        coala.cr.go('/' + id)
-      }  
     }
   }
 </script>

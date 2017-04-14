@@ -1,11 +1,13 @@
-<div>
+<div class="bg-img"><img src="https://unsplash.it/500/1080/?random"></div>
+<div class="blog-list">
   {{~data.resource :item}}
   <div class="item" data-id={{!item.id}}>
     <h1 class="title"><a href="#/{{!item.id}}">{{!item.title}}</a></h1>
-    <h5 class="title">{{!item.createTime}}</h5>
+    <h5 class="title">{{!item.formatDate}}</h5>
     <div class="content">{{!item.intro}}</div>
   </div>
   {{~}}
+  <h1 class="loadmore"><a href="javascript:;" id="loadMore">加载更早的博客...</a></h1>
 </div>
 
 <script>
@@ -18,22 +20,43 @@
 
     listen: {
       update: function() {
-        // now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate() + ' ' +
-              // now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds()
         this.data.resource.forEach(function(item) {
           item.intro = $(item.contentHTML).text().substr(1, 200)
+          var d = new Date(item.createTime)
+          item.formatDate = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' +
+              d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
         })
       }
     },
 
     mixins: {
+      parmas: {
+        _sort: 'createTime',
+        _order: 'DESC',
+        _page: 1,
+        _limit: 10
+      },
+
       fetch: function() {
         return $.ajax({
           url: '/api/blogs',
-          data: {
-            '_sort': 'createTime',
-            '_order': 'DESC'
-          }
+          data: this.parmas
+        })
+      }
+    },
+
+    events: {
+      'click #loadMore': 'loadMore'
+    },
+
+    handle: {
+      loadMore: function() {
+        var _this = this
+        this.parmas._page++
+        this.fetch().done(function(result) {
+          if (result.length === 0) return alert('没有更早的博客了!')
+          _this.data.resource = _this.data.resource.concat(result)
+          _this.update()
         })
       }
     }
@@ -41,12 +64,21 @@
 </script>
 
 <style>
-  body {
-    box-sizing: border-box;
-    min-width: 200px;
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 45px;
+  .bg-img {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .blog-list {
+    position: absolute;
+    top: 0;
+    left: 500px;
+    padding: 20px;
+  }
+
+  .loadmore {
+    text-align: center;
   }
 
 </style>

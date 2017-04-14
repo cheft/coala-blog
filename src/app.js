@@ -1,5 +1,6 @@
 window.$ = require('jquery')
 var coala = require('coala')
+require('./assets/css/app.css')
 
 function asyncMount(component) {
 	coala.cp = component

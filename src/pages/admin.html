@@ -10,7 +10,7 @@
     listen: {
       mount: function() {
         this.initEditor()
-      }  
+      }
     },
 
     mixins: {
@@ -39,8 +39,14 @@
       },
 
       appendSomething: function() {
+        var _this = this
         this.$('.editor-toolbar').append('<span class="editor-append"></span>')
-        coala.mount(require('../components/publish.html'), '.editor-append').parent = this
+        var publish = coala.component(require('../components/publish.html'))
+        publish.parent = this
+        publish.on('finish', function() {
+          _this.simplemde.value('')
+        })
+        publish.mount('.editor-append')
       },
 
       getContent() {

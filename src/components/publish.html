@@ -3,6 +3,12 @@
 
 <script>
   module.exports = {
+    listen: {
+      finish: function() {
+        this.$('.blog-title').val('')
+      }
+    },
+    
     events: {
       'click .publish-btn': 'publish'
     },
@@ -24,6 +30,7 @@
             createTime: new Date() + ''
           }
         }).done(function (result) {
+          _this.trigger('finish')
           alert('发表成功！')
         })
       }

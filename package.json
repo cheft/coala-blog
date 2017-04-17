@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --hot --colors --config build/webpack.dev.js",
-    "build": "rm -rf dist & webpack --config build/webpack.prd.js",
-    "build2": "rm -rf dist & webpack --optimize-minimize --config build/webpack.prd.js"
+    "build": "rm -rf dist & webpack --optimize-minimize --config build/webpack.prd.js"
   },
   "keywords": [
     "coala",

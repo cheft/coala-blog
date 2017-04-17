@@ -4,6 +4,7 @@ var nprogress = require('nprogress')
 var coala = require('coala')
 require('./assets/css/app.css')
 
+nprogress.configure({ showSpinner: false })
 
 function asyncMount(component) {
 	coala.cp = component
@@ -13,7 +14,7 @@ function asyncMount(component) {
 	coala.cp.mount('#app')
 }
 
-var mount = function (name, id) {
+function mount(name, id) {
 	nprogress.start()
 	if (coala.cp) coala.cp.unmount()
 	switch (name) {
@@ -27,8 +28,7 @@ var mount = function (name, id) {
 			require.ensure([], function (require) {
 				var detail = require('./pages/detail.html')
         detail.id = id
-				var component = coala.component(detail)
-				asyncMount(component)
+				asyncMount(coala.component(detail))
 			})
 			break
 	}
@@ -45,4 +45,3 @@ coala.cr = coala.router({
 		}
 	}
 })
-

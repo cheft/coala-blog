@@ -1,6 +1,7 @@
 <div>
   <textarea class="blog-content"></textarea>
 </div>
+
 <script>
   require('simplemde/dist/simplemde.min.css')
   var SimpleMDE = require('simplemde')
@@ -49,7 +50,7 @@
         publish.mount('.editor-append')
       },
 
-      getContent() {
+      getContent: function() {
         var content = this.simplemde.value()
         return {
           content: content,

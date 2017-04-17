@@ -3,12 +3,5 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
-}
-
-body {
-    /*box-sizing: border-box;
-    min-width: 200px;
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 45px;*/
+    font-family: "PingFang SC", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Microsoft Yahei", 微软雅黑, STHeiti, 华文细黑, sans-serif;
 }

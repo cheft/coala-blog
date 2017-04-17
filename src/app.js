@@ -1,15 +1,20 @@
 window.$ = require('jquery')
+require('nprogress/nprogress.css')
+var nprogress = require('nprogress')
 var coala = require('coala')
 require('./assets/css/app.css')
+
 
 function asyncMount(component) {
 	coala.cp = component
 	coala.cp.on('mount', function() {
+		nprogress.done()
 	})
 	coala.cp.mount('#app')
 }
 
 var mount = function (name, id) {
+	nprogress.start()
 	if (coala.cp) coala.cp.unmount()
 	switch (name) {
 		case 'list':

@@ -3,11 +3,11 @@
   {{~data.resource :item}}
   <div class="item" data-id={{!item.id}}>
     <h2><a href="#/{{!item.id}}" class="title">{{!item.title}}</a></h2>
-    <div class="date">{{!item.formatDate}}</div>
+    <div class="date">{{!item.createTime}}</div>
     <div class="content">{{!item.intro}}</div>
   </div>
   {{~}}
-  <div class="loadmore"><a href="javascript:;" id="loadMore">加载更早的博客 ...</a></div>
+  <div class="loadmore"><a href="javascript:;" id="loadMore">点击加载更早的博客</a></div>
 </div>
 
 <script>
@@ -29,9 +29,6 @@
       update: function() {
         this.data.resource.forEach(function(item) {
           item.intro = $(item.contentHTML).text().substr(0, 225)
-          var d = new Date(item.createTime)
-          item.formatDate = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' +
-              d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
         })
       }
     },

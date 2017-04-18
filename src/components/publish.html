@@ -19,7 +19,6 @@
         var title = this.$('.blog-title').val()
         if (!title) return alert('请填写标题');
         var contentObj = this.parent.getContent()
-        var now = new Date()
         $.ajax({
           url: '/api/blogs',
           type: 'POST',
@@ -27,7 +26,7 @@
             title: title,
             content: contentObj.content,
             contentHTML: contentObj.contentHTML,
-            createTime: new Date() + ''
+            createTime: (new Date()).toLocaleString()
           }
         }).done(function (result) {
           _this.trigger('finish')

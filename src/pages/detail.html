@@ -1,7 +1,8 @@
 <div id="header"></div>
 <div class="detail">
   <div class="item">
-    <h1 class="title">{{!data.resource.title}}</h1>
+    <h2 class="title">{{!data.resource.title}}</h2>
+    <div class="date">{{!data.resource.createTime}}</div>
     <div class="markdown-body">{{=data.resource.contentHTML}}</div>
   </div>
 </div>
@@ -45,5 +46,11 @@
     max-width: 980px;
     margin: auto;
     padding: 10px;
+  }
+
+  .date {
+    font-size: 14px;
+    color: #A9A9A9;
+    margin-bottom: 10px;
   }
 </style>

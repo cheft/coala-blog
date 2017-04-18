@@ -13,7 +13,7 @@ const devServer = {
     '/api/*': {
       changeOrigin: true,
       
-      target: 'http://172.16.72.56:3000',
+      target: 'http://localhost:3000',
       pathRewrite: { // 根据实际情况配置是否需要重写 url
         '^/api': ''
       }

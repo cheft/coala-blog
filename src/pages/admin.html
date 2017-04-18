@@ -29,19 +29,17 @@
           hideIcons: ['preview', 'guide'],
           status: false
         })
+        
         this.simplemde.toggleSideBySide()
         this.$('.fa-columns').hide()
         this.$('.fa-arrows-alt').hide()
-        setTimeout(function() {
-          _this.$('.CodeMirror').css('border-color', '#ddd')
-        }, 20)
 
         this.appendSomething()
       },
 
       appendSomething: function() {
         var _this = this
-        this.$('.editor-toolbar').append('<span class="editor-append"></span>')
+        this.$('.editor-toolbar').append('<span class="editor-append clearfix"></span>')
         var publish = coala.component(require('../components/publish.html'))
         publish.parent = this
         publish.on('finish', function() {
@@ -67,7 +65,7 @@
 }
 
 .CodeMirror {
-  border-color: #fff;
+  border-color: #ddd;
 }
 
 .editor-toolbar {
@@ -80,12 +78,23 @@
   top: 10px;
   left: 50%;
   width: 50%;
-  clear: both;
 }
 
 @media(max-width: 1240px) {
   .editor-append {
     text-align: right;
   }
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height:0;
+  clear:both;
+  visibility:hidden
+}
+
+.clearfix {
+  *+height:1%;
 }
 </style>

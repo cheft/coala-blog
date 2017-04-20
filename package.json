@@ -1,7 +1,7 @@
 {
   "name": "coala-blog",
   "version": "0.0.1",
-  "description": "coala.js starter kit",
+  "description": "simple blog",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --hot --colors --config build/webpack.dev.js",
@@ -17,8 +17,7 @@
     "coala": ">= 1.0.0-beta.1 < 2.0.0",
     "jquery": "^3.2.1",
     "nprogress": "^0.2.0",
-    "simplemde": "^1.11.2",
-    "typo.css": "^2.1.2"
+    "simplemde": "^1.11.2"
   },
   "devDependencies": {
     "coala-dot-loader": "^0.0.3",
